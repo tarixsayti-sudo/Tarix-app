@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tarix imtihoni</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--deep:#071528;--lapis:#0c2a4d;--turq:#35c2b4;--gold:#e2b857;--ivory:#f2ead7;--mute:#9fb3c8;--bad:#e5806f}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--deep);color:var(--ivory);font:17px/1.5 'Spectral',Georgia,serif}
+body{min-height:100vh;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);background:radial-gradient(120% 50% at 50% 0,#14437a,rgba(20,67,122,0) 70%),linear-gradient(180deg,var(--lapis),var(--deep) 60%)}
+main{max-width:560px;margin:0 auto;padding:0 16px 40px}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+h1,h2{font-family:'Marcellus',Georgia,serif;font-weight:400}
+h1{font-size:36px;text-align:center;margin:34px 0 4px;background:linear-gradient(180deg,#fff3cf,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:22px;color:var(--gold);margin:22px 0 10px}
+.sub{text-align:center;color:var(--mute);margin-bottom:22px}
+.card{display:block;width:100%;text-align:left;text-decoration:none;color:inherit;margin-bottom:14px;padding:18px;border:1px solid rgba(53,194,180,.3);border-radius:26px 26px 8px 8px;background:linear-gradient(160deg,rgba(22,64,110,.6),rgba(8,24,46,.75))}
+.card b{font-family:'Marcellus',serif;font-weight:400;font-size:22px;display:block}
+.card small{color:var(--mute)}
+.btn{display:block;width:100%;padding:14px;border-radius:999px;background:var(--gold);color:#241a05;font-weight:600;margin-top:16px}
+.btn[disabled]{opacity:.4!important}
+.code{width:100%;height:64px;text-align:center;font-size:34px;letter-spacing:.5em;border-radius:18px;border:1px solid var(--turq);background:rgba(7,21,40,.7);outline:0}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 -16px;padding:10px 16px;background:rgba(7,21,40,.94);border-bottom:1px solid rgba(53,194,180,.3)}
+.bar #t{font:24px 'Marcellus',serif;color:var(--gold)}
+.bar #t.low{color:var(--bad)}
+.bar #fin{padding:8px 16px;border-radius:999px;background:var(--turq);color:#04211e;font-weight:600}
+.r{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.r b{width:30px;color:var(--mute);font-weight:600}
+.r button{flex:1;min-width:0;padding:0;height:44px;border-radius:12px;border:1px solid rgba(242,234,215,.2);background:rgba(242,234,215,.05)}
+.r button.on{background:var(--gold);border-color:var(--gold);color:#241a05;font-weight:600}
+.w{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.w b{width:30px;color:var(--mute)}
+.w input{flex:1;min-width:0;height:44px;padding:0 12px;border-radius:12px;border:1px solid rgba(242,234,215,.2);background:rgba(7,21,40,.7);outline:0}
+.w input:focus{border-color:var(--turq)}
+.gr{color:#04211e;background:var(--gold);padding:1px 12px;border-radius:999px;font-weight:600}
+.d{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.d span{width:100px;color:var(--mute)}
+.d i{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--turq),var(--gold));min-width:2px}
+.g{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.g div{text-align:center;padding:4px 0;border-radius:10px;font-weight:600}
+.g small{display:block;font-size:11px;font-weight:400;opacity:.8}
+.y{background:rgba(53,194,180,.18);border:1px solid var(--turq)}
+.n{background:rgba(229,128,111,.15);border:1px solid var(--bad)}
+.wl p{padding:6px 10px;margin-top:6px;border-radius:10px}
+[hidden]{display:none!important}
+.inp{width:100%;height:46px;padding:0 12px;border-radius:12px;border:1px solid rgba(242,234,215,.2);background:rgba(7,21,40,.7);outline:0}
+.inp:focus{border-color:var(--turq)}
+.lb{display:block;margin:14px 0 6px;color:var(--mute)}
+.row2{display:flex;gap:8px}.row2 .inp{flex:1;min-width:0}
+.mini{padding:0 14px;border-radius:12px;border:1px solid var(--turq);color:var(--turq);white-space:nowrap}
+.chk{display:flex;align-items:center;gap:10px;margin:12px 0 4px;color:var(--mute)}
+.chk input{width:20px;height:20px;accent-color:var(--gold)}
+.pg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}
+.pg small{display:block;text-align:center;font-size:11px;color:var(--mute)}
+.pg input{width:100%;height:38px;padding:0 4px;text-align:center;border-radius:10px;border:1px solid rgba(242,234,215,.2);background:rgba(7,21,40,.7);outline:0}
+.hint{color:var(--mute);font-size:15px;margin-bottom:10px}
+.btn.ghost{background:none;border:1px solid rgba(242,234,215,.3);color:var(--ivory)}
+.bar .bk{padding:8px 16px;border-radius:999px;border:1px solid var(--turq);color:var(--turq)}
+.tw b{width:42px}
+main{position:relative;z-index:1}
+#fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#fx .tile{position:absolute;inset:-56px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cg fill='none' stroke='%2335c2b4' stroke-opacity='.13'%3E%3Crect x='14' y='14' width='28' height='28'/%3E%3Crect x='14' y='14' width='28' height='28' transform='rotate(45 28 28)'/%3E%3C/g%3E%3C/svg%3E");animation:tile 28s linear infinite}
+#fx .sky{position:absolute;left:0;bottom:0;width:100%;height:170px;animation:breath 6s ease-in-out infinite}
+#fx .em{position:absolute;bottom:-8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);opacity:0;animation:up linear infinite}
+@keyframes tile{to{transform:translate(56px,56px)}}
+@keyframes breath{50%{opacity:.55}}
+@keyframes up{0%{transform:translate(0,0);opacity:0}10%{opacity:.9}100%{transform:translate(var(--x),-105vh);opacity:0}}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes glow{50%{filter:drop-shadow(0 4px 30px rgba(226,184,87,.7))}}
+@keyframes dw{to{stroke-dashoffset:0}}
+@keyframes sp{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(2);opacity:.5}}
+@keyframes ring{50%{box-shadow:0 0 28px rgba(226,184,87,.5)}}
+@keyframes shine{to{left:115%}}
+.in{opacity:0;animation:in 1s ease var(--d,0s) forwards}
+h1.in{animation:in 1.2s ease var(--d,0s) forwards,glow 4s ease-in-out 2.8s infinite}
+.star{width:220px;height:220px;display:block;margin:20px auto -40px;filter:drop-shadow(0 0 16px rgba(53,194,180,.4))}
+.star *{fill:none;stroke:var(--turq);stroke-width:1.2}
+.star .d{stroke-dasharray:1;stroke-dashoffset:1;animation:dw 2.4s cubic-bezier(.6,.1,.2,1) forwards}
+.star .d2{animation-delay:.5s;stroke:var(--gold)}
+.star .dots{stroke-dasharray:1.5 5;stroke-opacity:.7}
+.star .slow{transform-origin:100px 100px;animation:sp 60s linear infinite}
+.star .rev{animation-direction:reverse;animation-duration:90s}
+.star .gold{fill:var(--gold);stroke:none;transform-origin:100px 100px;animation:pulse 2.5s ease-in-out infinite}
+.enter{position:relative;overflow:hidden;display:block;width:100%;margin-top:28px;padding:22px 16px;text-align:center;border:1px solid var(--gold);border-radius:34px 34px 10px 10px;background:linear-gradient(160deg,rgba(226,184,87,.22),rgba(8,24,46,.85));font:28px 'Marcellus',Georgia,serif;color:var(--gold);opacity:0;animation:in 1s ease 2.2s forwards,ring 3s ease-in-out 3.4s infinite}
+.enter::after{content:"";position:absolute;top:0;bottom:0;left:-80px;width:60px;background:linear-gradient(100deg,transparent,rgba(255,243,207,.5),transparent);animation:shine 3.5s ease-in-out 3.2s infinite}
+.enter small{display:block;margin-top:4px;font:15px 'Spectral',Georgia,serif;color:var(--mute)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.in,.enter{opacity:1!important}.star .d{stroke-dashoffset:0}.em{display:none}}
+.r.tp{gap:6px}
+.pt{width:54px;flex:none;height:44px;padding:0 4px;text-align:center;border-radius:12px;border:1px solid var(--turq);background:rgba(7,21,40,.7);color:var(--gold);outline:0}
+.pt:focus{border-color:var(--gold)}
+.sumbox{margin:18px 0 0;padding:12px;border-radius:14px;border:1px solid rgba(226,184,87,.4);text-align:center;color:var(--mute)}
+.sumbox b{color:var(--gold);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.stats div{padding:12px;border:1px solid rgba(53,194,180,.3);border-radius:16px;background:rgba(8,24,46,.6);text-align:center}
+.stats i{font-style:normal;font-size:20px}
+.stats b{display:block;font:26px 'Marcellus',serif;color:var(--gold);font-weight:400}
+.stats small{color:var(--mute)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.acts .mini{height:38px}
+.card.ex small{display:block}
+.ta{width:100%;min-height:90px;padding:10px 12px;border-radius:12px;border:1px solid rgba(242,234,215,.2);background:rgba(7,21,40,.7);outline:0;resize:vertical}
+.ta:focus{border-color:var(--turq)}
+.trow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid rgba(242,234,215,.1)}
+.trow span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trow .mini{height:34px;border-color:var(--bad);color:var(--bad)}
+select.inp{appearance:none;-webkit-appearance:none;padding-right:12px}
+select.inp option{background:#0c2a4d;color:#f2ead7}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+.chips button{padding:6px 12px;border-radius:999px;border:1px solid rgba(53,194,180,.4);color:var(--turq);font-size:14px}
+.gr6{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.gr6 small{display:block;text-align:center;font-size:12px;color:var(--mute)}
+.gr6 input{width:100%;height:40px;padding:0 2px;text-align:center;border-radius:10px;border:1px solid rgba(242,234,215,.2);background:rgba(7,21,40,.7);outline:0}
+.gr6 input:focus{border-color:var(--turq)}
+select{font:inherit;color:inherit}
+.sg{display:grid;gap:12px;margin-top:18px}
+.sg.c1{grid-template-columns:1fr}.sg.c2{grid-template-columns:repeat(2,1fr)}.sg.c3{grid-template-columns:repeat(3,1fr)}
+.sg button{padding:20px 8px;text-align:center;border:1px solid rgba(53,194,180,.35);border-radius:22px 22px 8px 8px;background:linear-gradient(160deg,rgba(22,64,110,.6),rgba(8,24,46,.75));font:22px 'Marcellus',Georgia,serif;color:var(--gold)}
+.sg button:active{border-color:var(--gold)}
+.sg small{display:block;margin-top:2px;font:13px 'Spectral',Georgia,serif;color:var(--mute)}
+
+body.pg2{--deep:#efe3c6;--lapis:#e6d3a5;--turq:#7a4b1e;--gold:#8a5a12;--ivory:#2c1b08;--mute:#6b5330;--bad:#a6321f;background:linear-gradient(180deg,#f6ecd2,#dcc89a)}
+body.pg2 h1{background:none;color:var(--gold)}
+body.pg2 .card,body.pg2 .sg button,body.pg2 .fact{background:linear-gradient(160deg,rgba(255,249,229,.92),rgba(224,200,150,.85))}
+body.pg2 .bar{background:rgba(239,227,198,.96)}
+body.pg2 .inp,body.pg2 .code,body.pg2 .pt,body.pg2 .ta,body.pg2 .w input,body.pg2 .th{background:rgba(255,250,235,.85)}
+body.pg2 .btn{color:#fff6dc}
+.note{margin:0 0 14px;padding:12px 14px;border-radius:14px;border:1px dashed var(--gold);background:rgba(226,184,87,.1);text-align:center}
+.fact{margin:0 0 16px;padding:16px 18px 14px;border-radius:6px 28px 6px 28px;border:1px solid var(--gold);background:linear-gradient(160deg,rgba(226,184,87,.16),rgba(8,24,46,.6))}
+.fact small{display:block;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-size:12px;margin-bottom:4px}
+.card{position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;bottom:0;left:-90px;width:46px;background:linear-gradient(100deg,transparent,rgba(255,243,207,.16),transparent);animation:shine 7s ease-in-out infinite}
+.th{position:fixed;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:9;width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);background:rgba(7,21,40,.8);font-size:19px}
+#fx .met{position:absolute;top:9%;left:-12%;width:90px;height:1px;background:linear-gradient(90deg,transparent,#fff3cf);opacity:0;animation:met 11s linear infinite}
+#fx .met:nth-of-type(2){top:24%;animation-delay:-5s;animation-duration:14s}
+@keyframes met{0%{transform:translate(0,0) rotate(24deg);opacity:0}3%{opacity:1}12%{transform:translate(125vw,55vh) rotate(24deg);opacity:0}100%{transform:translate(125vw,55vh) rotate(24deg);opacity:0}}
+</style>
+</head>
+<body>
+<main id="a"></main>
+<script>
+const tg=window.Telegram&&Telegram.WebApp,P=new URLSearchParams(location.search),$=s=>document.querySelector(s),A=$("#a");
+try{tg.ready();tg.expand();tg.setHeaderColor("#071528");tg.setBackgroundColor("#071528")}catch(e){}
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const OPT=i=>i>=32?"ABCDEF":"ABCD";
+const hap=()=>{try{tg.HapticFeedback.selectionChanged()}catch(e){}};
+const send=o=>{try{tg.sendData(JSON.stringify(o))}catch(e){alert("Ilovani Telegramdagi pastki «Tarix» tugmasi orqali oching.")}};
+const dec=s=>{s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(s),c=>c.charCodeAt(0))))};
+
+const STAR=`<svg class="star" viewBox="0 0 200 200" aria-hidden="true"><circle class="d" pathLength="1" cx="100" cy="100" r="94"/><g class="slow"><rect class="d" pathLength="1" x="42" y="42" width="116" height="116"/><rect class="d" pathLength="1" x="42" y="42" width="116" height="116" transform="rotate(45 100 100)"/></g><g class="slow rev"><rect class="d d2" pathLength="1" x="62" y="62" width="76" height="76"/><rect class="d d2" pathLength="1" x="62" y="62" width="76" height="76" transform="rotate(45 100 100)"/></g><circle class="dots" cx="100" cy="100" r="82"/><circle class="gold" cx="100" cy="100" r="4"/></svg>`;
+const SKY=`<svg class="sky" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g fill="#14437a" opacity=".6"><rect y="100" width="400" height="20"/><path d="M165 120V72a35 35 0 0 1 70 0v48z"/><path d="M174 62a26 30 0 0 1 52 0z"/><rect x="199" y="22" width="2" height="12"/><rect x="118" y="44" width="8" height="76"/><rect x="274" y="44" width="8" height="76"/><path d="M116 44h12l-6-12zM272 44h12l-6-12z"/><rect x="20" y="82" width="92" height="38"/><rect x="288" y="82" width="92" height="38"/><path d="M46 82a16 14 0 0 1 32 0zM322 82a16 14 0 0 1 32 0z"/></g></svg>`;
+function atmo(){
+  if(!$(".th")){
+    let TH=0;try{TH=+localStorage.getItem("th")}catch(e){}
+    const b=document.createElement("button"),ap=()=>{document.body.classList.toggle("pg2",!!TH);b.textContent=TH?"🌙":"📜"};
+    b.className="th";b.setAttribute("aria-label","Mavzuni almashtirish");ap();
+    b.onclick=()=>{TH=TH?0:1;try{localStorage.setItem("th",TH)}catch(e){}ap();hap()};
+    document.body.append(b);
+  }
+  if($("#fx"))return;
+  const f=document.createElement("div");
+  f.id="fx";
+  let h='<div class="tile"></div><i class="met"></i><i class="met"></i>'+SKY;
+  for(let i=0;i<22;i++){const s=2+Math.random()*3;h+=`<i class="em" style="left:${Math.random()*100}%;width:${s}px;height:${s}px;--x:${(Math.random()*80-40)|0}px;animation-duration:${(8+Math.random()*10)|0}s;animation-delay:-${(Math.random()*14)|0}s"></i>`}
+  f.innerHTML=h;
+  document.body.prepend(f);
+}
+
+/* HAVOLALAR: tugma kaliti -> Telegram post havolasi. Bo'sh ("") bo'lsa, tugmada "tez orada" turadi.
+   Kalitlar: d6-yangi, d7-jahon-yangi, d9-uzb-eski ... (darslik) · q6..q11 (qo'llanma) · x6..x11 (xronologiya) · sulolalar · asarlar */
+const L={
+"d6-yangi":"https://t.me/c/3914815374/27","d6-eski":"https://t.me/c/3914815374/26",
+"d7-jahon-yangi":"https://t.me/c/3914815374/14","d7-jahon-eski":"https://t.me/c/3914815374/4","d7-uzb-yangi":"https://t.me/c/3914815374/15","d7-uzb-eski":"https://t.me/c/3914815374/5",
+"d8-jahon-yangi":"https://t.me/c/3914815374/17","d8-jahon-eski":"https://t.me/c/3914815374/6","d8-uzb-yangi":"https://t.me/c/3914815374/16","d8-uzb-eski":"https://t.me/c/3914815374/7",
+"d9-jahon-yangi":"https://t.me/c/3914815374/21","d9-jahon-eski":"https://t.me/c/3914815374/8","d9-uzb-yangi":"https://t.me/c/3914815374/18","d9-uzb-eski":"https://t.me/c/3914815374/9",
+"d10-jahon-yangi":"https://t.me/c/3914815374/24","d10-jahon-eski":"https://t.me/c/3914815374/10","d10-uzb-yangi":"https://t.me/c/3914815374/25","d10-uzb-eski":"https://t.me/c/3914815374/11",
+"d11-jahon-yangi":"https://t.me/c/3914815374/22","d11-jahon-eski":"https://t.me/c/3914815374/12","d11-uzb-yangi":"https://t.me/c/3914815374/23","d11-uzb-eski":"https://t.me/c/3914815374/13",
+"q6":"","q7":"","q8":"","q9":"","q10":"","q11":"",
+"x6":"","x7":"","x8":"","x9":"","x10":"","x11":"",
+"sulolalar":"","asarlar":""
+};
+/* Admin ilova ichidan o'zgartirgan havolalar (bot yuboradi: ?i=...) standartlarning ustidan yoziladi */
+let IN={};try{IN=dec(P.get("i")||"")}catch(e){}
+const LP="https://t.me/c/3914815374/";
+Object.entries(IN.L||{}).forEach(([k,v])=>{L[k]=/^\d+$/.test(v)?LP+v:v});
+const warn0=t=>{try{tg.showAlert(t)}catch(e){alert(t)}};
+const link=k=>{
+  const u=L[k];
+  if(!u)return warn0("Bu havola tez orada qo'shiladi.");
+  try{if(/^https:\/\/t\.me\//.test(u)&&tg.openTelegramLink)tg.openTelegramLink(u);else tg.openLink(u)}catch(e){window.open(u,"_blank")}
+};
+const SN=[6,7,8,9,10,11],EN={yangi:"🆕 Yangi",eski:"📜 Eski"},FN={jahon:"🌍 Jahon tarixi",uzb:"🇺🇿 O'zbekiston tarixi"};
+const ED=n=>n>=10?["eski","yangi"]:["yangi","eski"];
+const soon=k=>L[k]?"":"tez orada";
+
+function scr(t,bk,items,cols){
+  atmo();A.oninput=A.onchange=null;
+  A.innerHTML=`<div class="bar"><span id="t">${t}</span><span></span><button class="bk" id="bk">Orqaga</button></div><div class="sg c${cols}">${items.map((x,i)=>`<button data-i="${i}">${x[0]}${x[2]?`<small>${x[2]}</small>`:""}</button>`).join("")}</div>`;
+  A.onclick=ev=>{const b=ev.target.closest("button");if(!b)return;if(b.id=="bk")return bk();const x=items[b.dataset.i];if(x)x[1]()};
+}
+const sinf=(kind,t)=>scr(t,home,SN.map(n=>[n+"-sinf",()=>kind=="d"?(n==6?nashr(6,""):fan(n)):link(kind+n),kind=="d"?"":soon(kind+n)]),3);
+const fan=n=>scr(n+"-sinf",()=>sinf("d","📘 Darsliklar"),Object.keys(FN).map(f=>[FN[f],()=>nashr(n,f)]),1);
+const nashr=(n,f)=>scr(n+"-sinf"+(f?" · "+(f=="uzb"?"O'zbekiston":"Jahon"):""),()=>n==6?sinf("d","📘 Darsliklar"):fan(n),ED(n).map(e=>{const k="d"+n+(f?"-"+f:"")+"-"+e;return[EN[e],()=>link(k),soon(k)]}),2);
+
+const MAPS={"afrika": {"t": "Afrika", "a": ["Somali", "Efiopiya", "Keniya", "Madagaskar", "Tanzaniya", "Mozambik", "Esvatini", "Lesoto", "Janubiy Afrika Respublikasi", "Misr", "Sudan", "Janubiy Sudan", "Uganda", "Ruanda", "Burundi", "Zambiya", "Zimbabve", "Liviya", "Chad", "Markaziy Afrika Respublikasi", "Kongo Demokratik Respublikasi", "Angola", "Namibiya", "Botsvana", "Niger", "Nigeriya", "Kamerun", "Ekvatorial Gvineya", "Gabon", "Kongo Respublikasi", "Jazoir", "Mali", "Burkina-Faso", "Gana", "Togo", "Benin", "Marokash", "G'arbiy Sahroi Kabir", "Mavritaniya", "Senegal", "Gambiya", "Gvineya-Bissau", "Syerra-Leone", "Liberiya", "Jibuti", "Eritreya", "Tunis", "Malavi", "Gvineya", "Komor orollari", "Sao-Tome va Prinsipi", "Kot-d'Ivuar"]}, "yevropa": {"t": "Yevropa", "a": ["Rossiya", "Finlyandiya", "Estoniya", "Belarus", "Latviya", "Litva", "Ukraina", "Moldova", "Norvegiya", "Shvetsiya", "Daniya", "Polsha", "Chexiya", "Slovakiya", "Ruminiya", "Bolgariya", "Turkiya", "Kipr", "Germaniya", "Avstriya", "Vengriya", "Serbiya", "Kosovo", "Shimoliy Makedoniya", "Gretsiya", "Sloveniya", "Xorvatiya", "Bosniya va Gertsegovina", "Chernogoriya", "Albaniya", "Islandiya", "Niderlandiya", "Belgiya", "Shveytsariya", "San-Marino", "Italiya", "Vatikan", "Malta", "Irlandiya", "Buyuk Britaniya", "Lyuksemburg", "Lixtenshteyn", "Fransiya", "Monako", "Andorra", "Portugaliya", "Ispaniya"]}, "osiyo": {"t": "Osiyo", "a": ["Isroil", "Iordaniya", "Livan", "Suriya", "Iroq", "Saudiya Arabistoni", "Yaman", "Gruziya", "Armaniston", "Ozarbayjon", "Quvayt", "Bahrayn", "Qatar", "Birlashgan Arab Amirliklari", "Ummon", "Eron", "Qozog'iston", "O'zbekiston", "Turkmaniston", "Qirg'iziston", "Tojikiston", "Afg'oniston", "Pokiston", "Rossiya", "Nepal", "Hindiston", "Maldiv orollari", "Mongoliya", "Xitoy", "Butan", "Bangladesh", "Myanma", "Tailand", "Shri-Lanka", "Singapur", "Laos", "Vetnam", "Kambodja", "Bruney", "Malayziya", "Indoneziya", "Shimoliy Koreya", "Janubiy Koreya", "Tayvan", "Filippin", "Yaponiya", "Sharqiy Timor"]}, "janubiy_amerika": {"t": "Janubiy Amerika", "a": ["Kolumbiya", "Venesuela", "Gayana", "Surinam", "Fransuz Gvianasi", "Ekvador", "Peru", "Boliviya", "Braziliya", "Paragvay", "Chili", "Argentina", "Urugvay"]}, "avstraliya": {"t": "Avstraliya", "a": ["Singapur", "Bruney", "Malayziya", "Indoneziya", "Filippin", "Sharqiy Timor", "Papua-Yangi Gvineya", "Avstraliya", "Yangi Zelandiya"]}, "shimoliy_va_markaziy_amerika": {"t": "Shimoliy va Markaziy Amerika", "a": ["Kanada", "AQSH", "Meksika", "Gvatemala", "Belize", "Salvador", "Gonduras", "Nikaragua", "Kosta-Rika", "Panama", "Kuba", "Yamayka", "Gaiti", "Dominikan Respublikasi"]}, "orta_sharq": {"t": "O'rta Sharq", "a": ["Misr", "Turkiya", "Isroil", "Livan", "Suriya", "Iordaniya", "Saudiya Arabistoni", "Iroq", "Quvayt", "Yaman", "Ummon", "Birlashgan Arab Amirliklari", "Qatar", "Bahrayn", "Eron"]}, "markaziy_amerika": {"t": "Markaziy Amerika", "a": ["Gvatemala", "Belize", "Salvador", "Gonduras", "Nikaragua", "Kosta-Rika", "Panama"]}};
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+function pg(t,bk,h,on){atmo();A.oninput=A.onchange=null;A.innerHTML=`<div class="bar"><span id="t">${t}</span><span></span><button class="bk" id="bk">Orqaga</button></div>${h}`;A.onclick=ev=>{const b=ev.target.closest("button");if(!b)return;if(b.id=="bk")return bk();on&&on(b)}}
+const xmenu=()=>scr("🗺 Xaritalar",home,Object.keys(MAPS).map(k=>[MAPS[k].t,()=>xmap(k),MAPS[k].a.length+" ta davlat"]),1);
+const xmap=k=>scr(MAPS[k].t,xmenu,[["🖼 Xaritani ko'rish",()=>xshow(k)],["🎯 Viktorina (10 savol)",()=>xq(k,0,0,shuf(MAPS[k].a.map((_,i)=>i)))],["📋 Javoblar ro'yxati",()=>xlist(k)]],1);
+const xshow=k=>pg(MAPS[k].t,()=>xmap(k),`<p class="sub">Kattalashtirish uchun suring</p><div style="overflow:auto;border-radius:12px"><img src="maps/${k}.jpg" onerror="this.onerror=null;this.src='${k}.jpg'" alt="" style="width:220%;max-width:none;display:block"></div>`);
+const xlist=k=>pg(MAPS[k].t,()=>xmap(k),`<div class="fact" style="line-height:1.9">${MAPS[k].a.map((n,i)=>`<b>${i+1}.</b> ${esc(n)}`).join("<br>")}</div>`);
+function xq(k,i,s,ord){const m=MAPS[k],n=Math.min(10,ord.length);
+  if(i>=n)return pg("🎯 Natija",()=>xmap(k),`<div class="fact" style="text-align:center"><b style="font-size:34px">${s} / ${n}</b></div><button class="btn" id="re">Qayta boshlash</button>`,b=>b.id=="re"&&xq(k,0,0,shuf(ord)));
+  const c=ord[i],op=shuf([c,...shuf(m.a.map((_,j)=>j).filter(j=>j!=c)).slice(0,3)]);let d=0;
+  pg(`${i+1}/${n} · ${s} ✅`,()=>xmap(k),`<div style="overflow:auto;max-height:40vh;border-radius:12px"><img src="maps/${k}.jpg" onerror="this.onerror=null;this.src='${k}.jpg'" alt="" style="width:200%;max-width:none;display:block"></div><h2>${c+1}-raqam qaysi davlat?</h2><div class="sg c1">${op.map(j=>`<button data-j="${j}">${esc(m.a[j])}</button>`).join("")}</div>`,b=>{if(d||b.dataset.j==null)return;d=1;const j=+b.dataset.j;hap();b.style.outline="2px solid "+(j==c?"#4cd08a":"#e0624f");if(j!=c)A.querySelector(`[data-j="${c}"]`).style.outline="2px solid #4cd08a";setTimeout(()=>xq(k,i+1,s+(j==c),ord),j==c?600:1400)})}
+let KB=null;
+const kbLoad=async()=>{if(!KB)try{let r=await fetch("kb.txt?v="+Date.now());if(!r.ok)r=await fetch("maps/kb.txt?v="+Date.now());if(!r.ok)throw 0;KB=(await r.text()).split("\n").filter(l=>l.trim()&&l[0]!="#").map(l=>l.split("|").map(x=>x.trim())).filter(r=>r.length>=3)}catch(e){KB=[]}return KB};
+const KC={xron:"🗓 Xronologiya (yillar)",shaxs:"🧑‍🎓 Tarixiy shaxslar",atama:"📖 Atamalar",sulola:"👑 Sulolalar",yurish:"⚔️ Hukmdorlar yurishlari",hukmdor:"👑 Hukmdorlar va islohotlari",imtihon:"📝 Imtihon qo'llanmalari (ehtimoliy)",qollanma:"📗 8-sinf O'zbekiston to'liq qo'llanma",toliq:"📑 Barcha PDF lar — to'liq matn (sahifa-sahifa)"};
+const kbMenu=async()=>{const r=await kbLoad();if(!r.length)return pg("📚 Tarix bazasi",home,`<div class="fact">⚠️ <b>kb.txt</b> fayli topilmadi. U GitHub'da <b>test.html</b> bilan bir joyda (bir papkada) turishi va nomi aynan <b>kb.txt</b> bo'lishi kerak.</div>`);scr("📚 Tarix bazasi",home,Object.keys(KC).map(k=>[KC[k],()=>kbCat(k),r.filter(x=>x[0]==k).length+" ta yozuv"]),1)};
+const kbCat=k=>{pg(KC[k],kbMenu,`<input class="inp" id="kq" placeholder="Qidirish: yil, ism yoki so'z" autocomplete="off"><div id="kl" style="margin-top:12px"></div>`);
+  const f=()=>{const q=$("#kq").value.toLowerCase();$("#kl").innerHTML=KB.filter(x=>x[0]==k&&(x[1]+" "+x[2]).toLowerCase().includes(q)).slice(0,60).map(x=>`<div class="fact" style="line-height:1.55"><b>${esc(x[1])}</b><br>${esc(x[2]).replace(/ ¶ /g,"<br><br>").replace(/ ▸ /g,"<br>▸ ")}</div>`).join("")||'<p class="sub">Topilmadi</p>'};$("#kq").oninput=f;f()};
+const kunlik=async()=>{const r=(await kbLoad()).filter(x=>x[0]=="xron"&&/^\d{3,4}-yil$/.test(x[1]));
+  if(r.length<4)return pg("🔥 Kunlik savol",home,'<p class="sub">Savol uchun bazada kamida 4 ta yil kerak.</p>');
+  const day=Math.floor(Date.now()/864e5),e=r[day%r.length];let S={d:0,n:0};try{S=JSON.parse(localStorage.getItem("kst"))||S}catch(x){}
+  const st=`<p class="sub">🔥 Ketma-ket: ${S.d==day||S.d==day-1?S.n:0} kun</p>`;
+  if(S.d==day)return pg("🔥 Kunlik savol",home,st+'<div class="fact">Bugungi savolga javob berdingiz. Ertaga yangi savol!</div>');
+  const op=shuf([e[1],...shuf([...new Set(r.map(x=>x[1]))].filter(y=>y!=e[1])).slice(0,3)]);
+  pg("🔥 Kunlik savol",home,st+`<div class="fact">${esc(e[2])}<br><b>Bu qaysi yilda?</b></div><div class="sg c1">${op.map(y=>`<button data-y="${esc(y)}">${esc(y)}</button>`).join("")}</div>`,b=>{if(!b.dataset.y)return;const ok=b.dataset.y==e[1];S={d:day,n:ok?(S.d==day-1?S.n+1:1):0};try{localStorage.setItem("kst",JSON.stringify(S))}catch(x){}
+    pg("🔥 Kunlik savol",home,`<div class="fact" style="text-align:center">${ok?"✅ To'g'ri!":"❌ To'g'ri javob: "+esc(e[1])}<br>🔥 ${S.n} kun</div>`)})};
+function home(){
+  atmo();A.oninput=A.onchange=null;
+  const TC=P.get("t")=="1",c=(k,t,s,d)=>`<button class="card in" style="--d:${d}s;margin-bottom:12px" data-h="${k}"><b>${t}</b><small>${s}</small></button>`;
+  A.innerHTML=`${STAR}<h1 class="in" style="--d:1.4s">Tarix xazinasi</h1><p class="sub in" style="--d:1.7s">Kerakli bo'limni tanlang</p>
+  ${IN.N?`<div class="note in" style="--d:1.8s">📣 ${esc(IN.N)}</div>`:""}${IN.F?`<div class="fact in" style="--d:1.85s"><small>📜 Tarixda bugun</small>${esc(IN.F)}</div>`:""}
+  ${c("d","📘 Darsliklar","6–11-sinf · Jahon va O'zbekiston tarixi",1.9)}
+  ${c("q","📗 Qo'llanmalar","6–11-sinf",2.05)}
+  ${c("x","🗓 Xronologiya","6–11-sinf",2.2)}
+  ${c("s","👑 Sulolalar",L.sulolalar?"Sulolalar va yillar":"Tez orada",2.35)}
+  ${c("a","📜 Asarlar",L.asarlar?"Tarixiy asarlar":"Tez orada",2.5)}
+  ${c("m","🗺 Xaritalar","Davlatlar xaritasi · viktorina",2.6)}
+  ${c("kn","🔥 Kunlik savol","Har kuni bitta savol · ketma-ket kunlar",2.62)}
+  ${c("kb","📚 Tarix bazasi","Yillar · shaxslar · atamalar · sulolalar (qidiruv)",2.65)}
+  ${c("e","📝 Testga kirish","O'qituvchi bergan 4 xonali kod bilan",2.7)}
+  ${TC?c("o","👨‍🏫 O'qituvchi bo'limi","Yangi test tuzish: javoblar va ballarni kiriting",2.85):""}`;
+  A.onclick=ev=>{
+    const b=ev.target.closest("[data-h]");if(!b)return;
+    const k=b.dataset.h;
+    if(k=="d")sinf("d","📘 Darsliklar");else if(k=="q")sinf("q","📗 Qo'llanmalar");else if(k=="x")sinf("x","🗓 Xronologiya");
+    else if(k=="s")link("sulolalar");else if(k=="a")link("asarlar");else if(k=="m")xmenu();else if(k=="kb")kbMenu();else if(k=="kn")kunlik();else if(k=="e")code();else if(k=="o")teacher();
+  };
+}
+
+function code(){
+  atmo();A.onclick=A.oninput=A.onchange=null;
+  A.innerHTML=`${STAR}<h1 class="in" style="--d:.6s">Kirish kodi</h1><p class="sub in" style="--d:.9s">O'qituvchi aytgan 4 ta raqamni kiriting</p>
+  <input id="c" class="code in" style="--d:1.1s" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••">
+  <button class="btn in" style="--d:1.3s" id="ok" disabled>Davom etish</button>
+  <button class="btn ghost in" style="--d:1.5s" id="bk0">Orqaga</button>`;
+  const c=$("#c"),ok=$("#ok");
+  c.oninput=()=>{c.value=c.value.replace(/\D/g,"");ok.disabled=c.value.length!=4};
+  ok.onclick=()=>send({t:"code",c:c.value});
+  $("#bk0").onclick=home;
+  c.focus();
+}
+
+function exam(){
+  const E=P.get("e"),st=+P.get("st")*1000,du=(+P.get("du")||3600)*1000,K="ans"+E;
+  let S,done=0;
+  try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+  if(!S||!S.m||S.m.length!=35||!S.w||S.w.length!=20)S={m:Array(35).fill(""),w:Array(20).fill("")};
+  const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+  const cnt=()=>S.m.filter(Boolean).length+S.w.filter(x=>x.trim()).length;
+  let h=`<div class="bar"><span id="t">--:--</span><span id="n"></span><button id="fin">Tugatish</button></div><h2>Test savollari</h2>`;
+  for(let i=0;i<35;i++)h+=`<div class="r"><b>${i+1}</b>${[...OPT(i)].map(v=>`<button data-q="${i}" data-v="${v}" class="${S.m[i]==v?"on":""}">${v}</button>`).join("")}</div>`;
+  h+=`<h2>Yozma savollar</h2>`;
+  for(let j=0;j<10;j++)h+=`<div class="w"><b>${36+j}</b><input data-w="${2*j}" placeholder="a)" maxlength="40" value="${esc(S.w[2*j])}"><input data-w="${2*j+1}" placeholder="b)" maxlength="40" value="${esc(S.w[2*j+1])}"></div>`;
+  A.innerHTML=h;
+  const tick=()=>{
+    const l=Math.max(0,st+du-Date.now()),s=Math.ceil(l/1000);
+    $("#t").textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+    $("#t").className=l<3e5?"low":"";
+    $("#n").textContent=cnt()+"/55";
+    if(!l&&!done){done=1;fin()}
+  };
+  const fin=()=>{
+    let w=S.w.slice(),o;
+    const mk=()=>({t:"sub",e:+E,m:S.m.map(x=>x||"-").join(""),w:w});
+    while(new Blob([JSON.stringify(o=mk())]).size>3900)w=w.map(x=>x.slice(0,Math.max(0,x.length-5)));
+    save();send(o);
+  };
+  A.onclick=ev=>{
+    const b=ev.target.closest("[data-q]");
+    if(b){
+      const i=+b.dataset.q,v=b.dataset.v;
+      S.m[i]=S.m[i]==v?"":v;
+      b.parentNode.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x.dataset.v==S.m[i]));
+      save();hap();tick();
+    }
+    if(ev.target.id=="fin"){
+      const m="Javob berilgan: "+cnt()+"/55. Tugatilsinmi? Qayta o'zgartirib bo'lmaydi.";
+      const go=()=>{done=1;fin()};
+      tg&&tg.showConfirm?tg.showConfirm(m,ok=>ok&&go()):confirm(m)&&go();
+    }
+  };
+  A.oninput=ev=>{const w=ev.target.dataset.w;if(w!=null){S.w[+w]=ev.target.value;save();tick()}};
+  tick();setInterval(tick,1000);
+}
+
+const atTs=a=>{const p=String(a).split("T"),dm=p[0].split("-").map(Number),tm=(p[1]||"0:0").split(":").map(Number);return Date.UTC(dm[0],dm[1]-1,dm[2],tm[0],tm[1])/1000-18000};
+const fmtAt=a=>String(a).replace("T"," ");
+function teacher(){
+  const K="newexam";
+  const D={n:"",c:"",m:Array(35).fill(""),w:Array(20).fill(""),mp:"1.1",wp:"1",dur:"60",at:"",mps:Array(35).fill(""),wps:Array(20).fill("")};
+  let S;
+  try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+  S=Object.assign({},D,S||{});
+  for(const k of["m","w","mps","wps"])if(!Array.isArray(S[k])||S[k].length!=D[k].length)S[k]=D[k].slice();
+  S.mps=S.mps.map(v=>v===""||v==null?S.mp:v);
+  S.wps=S.wps.map(v=>v===""||v==null?S.wp:v);
+  const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+  const note=t=>{try{tg.showAlert(t)}catch(e){alert(t)}};
+  const vars=x=>String(x||"").split("|").map(v=>v.trim()).filter(Boolean);
+  const num=v=>{const x=Number(String(v==null?"":v).replace(",",".").trim());return isFinite(x)&&x>0&&x<=1000?x:0};
+  const wl=j=>(36+(j>>1))+"ab"[j&1];
+  const cnt=()=>S.m.filter(Boolean).length+S.w.filter(x=>vars(x).length).length;
+  const sum=a=>a.reduce((x,y)=>x+y,0);
+
+  let h=`<div class="bar"><span id="t">🛠 Test tuzish</span><span id="n"></span><button class="bk" id="bk">Orqaga</button></div>
+  <h2>Imtihon</h2>
+  <label class="lb">Imtihon nomi</label><input class="inp" id="tn" maxlength="100" placeholder="Masalan: Tarix · 1-variant" value="${esc(S.n)}">
+  <label class="lb">4 xonali kirish kodi</label>
+  <div class="row2"><input class="inp" id="tc2" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off" value="${esc(S.c)}"><button class="mini" id="rnd">🎲 Tasodifiy</button></div>
+  <label class="lb">Imtihon davomiyligi (daqiqa)</label>
+  <input class="inp" id="td" inputmode="numeric" maxlength="3" placeholder="Masalan: 60" autocomplete="off" value="${esc(S.dur)}">
+  <label class="lb">Boshlanish vaqti (Toshkent vaqti bilan)</label>
+  <input class="inp" id="ta2" type="datetime-local" value="${esc(S.at)}">
+  <p class="hint" style="margin-top:8px">Vaqtni tanlasangiz, bot imtihonni o'sha paytda o'zi boshlaydi va hammaga xabar beradi. Bo'sh qoldirsangiz, imtihonni o'zingiz «▶️ Boshlash» tugmasi bilan boshlaysiz. Davomiylik har bir talaba kod kiritgan paytdan hisoblanadi.</p>
+  <h2>Test javoblari va ballari (1–35)</h2>
+  <p class="hint">Javobni tanlang, o'ng tomondagi katakka shu savolning bali yoziladi. 33–35-savollarda E va F ham bor.</p>
+  <label class="lb">Barcha test savollariga bir xil ball</label>
+  <div class="row2"><input class="inp" id="mp" inputmode="decimal" value="${esc(S.mp)}"><button class="mini" id="mpa">Hammasiga qo'llash</button></div>
+  <div style="height:12px"></div>`;
+  for(let i=0;i<35;i++)h+=`<div class="r tp"><b>${i+1}</b>${[...OPT(i)].map(v=>`<button data-q="${i}" data-v="${v}" class="${S.m[i]==v?"on":""}">${v}</button>`).join("")}<input class="pt" data-ms="${i}" inputmode="decimal" aria-label="${i+1}-savol bali" value="${esc(S.mps[i])}"></div>`;
+  h+=`<h2>Yozma javoblar va ballari (36–45)</h2>
+  <p class="hint">Bir nechta to'g'ri variantni | belgisi bilan ajrating. Masalan: Amir Temur | Temur. O'ng tomondagi katak shu qismning bali.</p>
+  <label class="lb">Barcha yozma qismlarga bir xil ball</label>
+  <div class="row2"><input class="inp" id="wp" inputmode="decimal" value="${esc(S.wp)}"><button class="mini" id="wpa">Hammasiga qo'llash</button></div>
+  <div style="height:12px"></div>`;
+  for(let j=0;j<20;j++)h+=`<div class="w tw"><b>${wl(j)}</b><input data-w="${j}" maxlength="120" placeholder="javob | variant" value="${esc(S.w[j])}"><input class="pt" data-ws="${j}" inputmode="decimal" aria-label="${wl(j)} bali" value="${esc(S.wps[j])}"></div>`;
+  h+=`<div class="sumbox" id="sm"></div>
+  <button class="btn" id="sv">Saqlash va botga yuborish</button>
+  <button class="btn ghost" id="clr">Tozalash</button>`;
+  A.innerHTML=h;
+  const upd=()=>{
+    $("#n").textContent=cnt()+"/55";
+    const tm=sum(S.mps.map(num)),tw=sum(S.wps.map(num));
+    $("#sm").innerHTML=`Test: <b>${tm.toFixed(1)}</b> · Yozma: <b>${tw.toFixed(1)}</b> · Jami: <b>${(tm+tw).toFixed(1)}</b> ball`;
+  };
+  upd();
+
+  A.oninput=ev=>{
+    const e=ev.target,d=e.dataset;
+    if(e.id=="tn")S.n=e.value;
+    else if(e.id=="tc2"){e.value=e.value.replace(/\D/g,"");S.c=e.value}
+    else if(e.id=="td"){e.value=e.value.replace(/\D/g,"");S.dur=e.value}
+    else if(e.id=="ta2")S.at=e.value;
+    else if(e.id=="mp")S.mp=e.value;
+    else if(e.id=="wp")S.wp=e.value;
+    else if(d.w!=null)S.w[+d.w]=e.value;
+    else if(d.ms!=null)S.mps[+d.ms]=e.value;
+    else if(d.ws!=null)S.wps[+d.ws]=e.value;
+    save();upd();
+  };
+  A.onchange=A.oninput;
+
+  A.onclick=ev=>{
+    const t=ev.target,b=t.closest("[data-q]");
+    if(b){
+      const i=+b.dataset.q,v=b.dataset.v;
+      S.m[i]=S.m[i]==v?"":v;
+      b.parentNode.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x.dataset.v==S.m[i]));
+      save();hap();upd();return;
+    }
+    if(t.id=="bk")return home();
+    if(t.id=="rnd"){S.c=String(1000+Math.floor(Math.random()*9000));$("#tc2").value=S.c;save();return}
+    if(t.id=="mpa"){
+      if(!num(S.mp))return note("Avval to'g'ri ball yozing (masalan 1.1).");
+      S.mps=S.mps.map(()=>S.mp);
+      A.querySelectorAll("[data-ms]").forEach(x=>x.value=S.mp);
+      save();upd();return;
+    }
+    if(t.id=="wpa"){
+      if(!num(S.wp))return note("Avval to'g'ri ball yozing (masalan 1).");
+      S.wps=S.wps.map(()=>S.wp);
+      A.querySelectorAll("[data-ws]").forEach(x=>x.value=S.wp);
+      save();upd();return;
+    }
+    if(t.id=="clr"){
+      const go=()=>{try{localStorage.removeItem(K)}catch(e){}teacher()};
+      const m="Kiritilgan hamma narsa o'chirilsinmi?";
+      try{tg.showConfirm(m,ok=>ok&&go())}catch(e){confirm(m)&&go()}
+      return;
+    }
+    if(t.id=="sv")submit();
+  };
+
+  const submit=()=>{
+    const n=S.n.trim(),c=S.c.trim();
+    if(n.length<2)return note("Imtihon nomini yozing.");
+    if(!/^\d{4}$/.test(c))return note("Kirish kodi aynan 4 ta raqam bo'lsin.");
+    const miss=[];S.m.forEach((v,i)=>{if(!v)miss.push(i+1)});
+    if(miss.length)return note("Javobi belgilanmagan test savollari: "+miss.join(", "));
+    const wv=S.w.map(vars),wm=[];wv.forEach((v,j)=>{if(!v.length)wm.push(wl(j))});
+    if(wm.length)return note("Yozma javobi yo'q qismlar: "+wm.join(", "));
+    const mp=S.mps.map(num),wp=S.wps.map(num);
+    let k=mp.indexOf(0);
+    if(k>=0)return note("Test bali noto'g'ri yoki bo'sh: "+(k+1)+"-savol.");
+    k=wp.indexOf(0);
+    if(k>=0)return note("Yozma qism bali noto'g'ri yoki bo'sh: "+wl(k));
+    const dur=Math.round(Number(S.dur));
+    if(!(dur>=10&&dur<=300))return note("Imtihon davomiyligi 10 dan 300 daqiqagacha bo'lsin.");
+    const at=(S.at||"").trim();
+    if(at&&atTs(at)<Date.now()/1000-60)return note("Boshlanish vaqti o'tib ketgan. Kelajakdagi vaqtni tanlang yoki bo'sh qoldiring.");
+    const o={t:"new",n:n,c:c,k:S.m.join(""),mp:mp,w:wv,wp:wp,dur:dur,at:at};
+    if(new Blob([JSON.stringify(o)]).size>3900)return note("Yozma javoblar juda uzun. Variantlarni qisqartiring (Telegram chegarasi 4 KB).");
+    const tm=sum(mp),tw=sum(wp);
+    const m=`${n}\nKod: ${c}\nTest: 35 ta, jami ${tm.toFixed(1)} ball\nYozma: 20 qism, jami ${tw.toFixed(1)} ball\nDavomiyligi: ${dur} daqiqa\nBoshlanishi: ${at?fmtAt(at):"qo'lda (Boshlash tugmasi bilan)"}\n\nBotga yuborilsinmi?`;
+    const go=()=>{try{localStorage.removeItem(K)}catch(e){}send(o)};
+    try{tg.showConfirm(m,ok=>ok&&go())}catch(e){confirm(m)&&go()}
+  };
+}
+
+const sdata=()=>{try{return dec(P.get("s")||"")}catch(e){return{}}};
+const warn=t=>{try{tg.showAlert(t)}catch(e){alert(t)}};
+const ask=(m,f)=>{try{tg.showConfirm(m,ok=>ok&&f())}catch(e){confirm(m)&&f()}};
+const EXST={ready:"tayyor",open:"davom etmoqda",closed:"yopilgan",published:"e'lon qilingan"};
+const GN=["A+","A","B+","B","C+","C"];
+const fmtT=ts=>{const d=new Date((ts+18000)*1000),p=x=>String(x).padStart(2,"0");return p(d.getUTCDate())+"."+p(d.getUTCMonth()+1)+" "+p(d.getUTCHours())+":"+p(d.getUTCMinutes())};
+
+function exBlock(E){
+  if(!E||!E.length)return `<p class="hint">Hozircha imtihon yo'q.</p>`;
+  return E.map(e=>{
+    const id=e[0],s=e[2],bt=(x,l)=>`<button class="mini" data-ex="${id}" data-x="${x}">${l}</button>`;
+    let b=s=="ready"?bt("go","▶️ Boshlash")
+      :s=="open"?bt("cl","⏹ Yopish")+bt("pt","👥 Kimlar")
+      :s=="closed"?bt("rs","📊 Rasch e'lon")+bt("sm","📊 Oddiy e'lon")+bt("pt","👥 Kimlar")
+      :bt("top","🏆 Top-10")+bt("csv","📄 CSV");
+    if(s!="ready")b+=bt("an","📈 Tahlil");
+    b+=bt("dup","📋 Nusxa");
+    if(s!="open")b+=bt("del","🗑");
+    return `<div class="card ex"><b>#${id} ${esc(e[1])}</b><small>${EXST[s]||esc(s)} · ${esc(e[3])} ta topshirgan · ${esc(e[4])} daq.${s=="ready"?(e[5]?" · ⏰ "+fmtT(e[5]):" · qo'lda boshlanadi"):""}</small><div class="acts">${b}</div></div>`;
+  }).join("");
+}
+
+function tools(D){
+  const E=D.E||[];
+  if(!E.length)return "";
+  const opts=E.map(e=>`<option value="${e[0]}">#${e[0]} · ${esc(e[1])}</option>`).join("");
+  return `<h2 id="s-tools">Imtihon asboblari</h2>
+  <label class="lb">Imtihonni tanlang</label><select class="inp" id="xe">${opts}</select>
+  <label class="lb">Kirish kodini o'zgartirish</label>
+  <div class="row2"><input class="inp" id="xc" inputmode="numeric" maxlength="4" placeholder="Yangi kod (bo'sh = tasodifiy)" autocomplete="off"><button class="mini" data-act="xcode">Saqlash</button></div>
+  <label class="lb">Nomini o'zgartirish</label>
+  <div class="row2"><input class="inp" id="xn" maxlength="100" placeholder="Yangi nom" autocomplete="off"><button class="mini" data-act="xname">Saqlash</button></div>
+  <label class="lb">Boshlanish vaqti (faqat «tayyor» imtihon)</label>
+  <div class="row2"><input class="inp" id="xst" type="datetime-local"><button class="mini" data-act="xstart">Saqlash</button></div>
+  <p class="hint" style="margin-top:8px">Toshkent vaqti. Bo'sh qoldirib saqlasangiz, vaqt olib tashlanadi va imtihonni o'zingiz boshlaysiz.</p>
+  <label class="lb">Davomiylik (daqiqa, faqat «tayyor» imtihon)</label>
+  <div class="row2"><input class="inp" id="xd" inputmode="numeric" maxlength="3" placeholder="Masalan: 90" autocomplete="off"><button class="mini" data-act="xdur">Saqlash</button></div>
+  <label class="lb">Talaba natijasi</label>
+  <div class="row2"><input class="inp" id="xs" placeholder="Ism, ID yoki telefon" autocomplete="off"><button class="mini" data-act="xres">🔎 Ko'rish</button></div>
+  <label class="lb">Qatnashchilarga xabar</label>
+  <select class="inp" id="xa"><option value="in">Kod kiritganlarga</option><option value="wait">Hali topshirmaganlarga</option><option value="done">Topshirganlarga</option></select>
+  <textarea class="ta" id="xt" maxlength="800" placeholder="Xabar matni" style="margin-top:8px"></textarea>
+  <button class="btn" data-act="xmsg">📢 Yuborish</button>`;
+}
+
+function onAct(ev){
+  const t=ev.target.closest("button");
+  if(!t)return;
+  const val=id=>(($("#"+id)||{}).value||"").trim(),a=t.dataset.act;
+  const S_=o=>send(Object.assign({t:"adm"},o));
+  const xe=()=>+val("xe");
+  if(t.id=="bk")return home();
+  if(t.dataset.go){const el=document.getElementById(t.dataset.go);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});return}
+  if(t.dataset.ex){
+    const i=+t.dataset.ex,x=t.dataset.x,go=()=>S_({a:"ex",i:i,x:x});
+    const m={go:"Imtihon boshlansinmi? Barcha foydalanuvchilarga xabar yuboriladi.",cl:"Imtihon yopilsinmi?",del:"Imtihon va uning natijalari o'chirilsinmi?",rs:"Rasch modeli bilan e'lon qilinsinmi?",sm:"Oddiy ball bilan e'lon qilinsinmi?",dup:"Imtihondan nusxa yaratilsinmi? Yangi tasodifiy kod beriladi."}[x];
+    return m?ask(m,go):go();
+  }
+  if(!a)return;
+  if(a=="new")return teacher();
+  if(a=="tools")return exams();
+  if(a=="tadd"){const v=val("ta");return v?S_({a:a,v:v}):warn("ID yoki telefon raqamini yozing.")}
+  if(a=="tdel")return ask("O'qituvchi huquqi olib tashlansinmi?",()=>S_({a:a,v:t.dataset.id}));
+  if(a=="find"){const v=val("uf");return v?S_({a:a,v:v}):warn("Ism, ID yoki telefon yozing.")}
+  if(a=="rename"){
+    const v=val("ru"),x=val("rn");
+    if(!v||x.length<3)return warn("Foydalanuvchi va yangi ismni (kamida 3 harf) yozing.");
+    return S_({a:a,v:v,x:x});
+  }
+  if(a=="dm"){
+    const v=val("dmu"),x=val("dmt");
+    if(!v||!x)return warn("Foydalanuvchi va xabar matnini yozing.");
+    return ask("Xabar yuborilsinmi?",()=>S_({a:a,v:v,x:x}));
+  }
+  if(a=="bc"){
+    const x=val("bct"),v=val("bca");
+    if(!x)return warn("Xabar matnini yozing.");
+    const who={all:"BARCHA foydalanuvchilarga",teachers:"barcha o'qituvchilarga",nosub:"faol imtihonni hali topshirmaganlarga"}[v]||"";
+    return ask("Xabar "+who+" yuboriladi. Davom etasizmi?",()=>S_({a:a,v:v,x:x}));
+  }
+  if(a=="retake"){
+    const v=val("rtu"),i=+val("rte");
+    if(!v||!i)return warn("Foydalanuvchi va imtihon raqamini yozing.");
+    return ask("Foydalanuvchining bu imtihondagi natijasi o'chiriladi va u qayta topshira oladi. Davom etasizmi?",()=>S_({a:a,v:v,i:i}));
+  }
+  if(a=="chadd"){
+    let v=val("ch");
+    if(!v)return warn("Kanal nomini yozing. Masalan: @kanal_nomi");
+    if(v[0]!="@")v="@"+v;
+    if(!/^@[A-Za-z0-9_]{4,32}$/.test(v))return warn("Kanal nomi noto'g'ri. Masalan: @kanal_nomi");
+    return S_({a:a,v:v});
+  }
+  if(a=="chdel")return ask(t.dataset.ch+" majburiy kanallardan olib tashlansinmi?",()=>S_({a:a,v:t.dataset.ch}));
+  if(a=="grades"){
+    const v=GN.map((_,k)=>Number(val("g"+k).replace(",",".")));
+    if(v.some(z=>!(z>=1&&z<=100)))return warn("Hamma chegarani 1 dan 100 gacha raqamda yozing.");
+    for(let k=0;k<5;k++)if(v[k]<=v[k+1])return warn("Chegaralar kamayish tartibida bo'lsin: A+ eng yuqori.");
+    return ask("Daraja chegaralari o'zgartirilsinmi? Keyingi e'lon qilinadigan natijalarga amal qiladi.",()=>S_({a:a,v:v}));
+  }
+  if(a=="setlink"){const v=val("lk"),x=val("lu");if(x&&!/^https:\/\/\S{6,}$/.test(x))return warn("Havola https:// bilan boshlansin.");return S_({a:a,v:v,x:x})}
+  if(a=="notice")return S_({a:a,x:val("nt")});
+  if(a=="fadd"){const x=val("ft");return x.length<10?warn("Fakt matnini yozing (kamida 10 belgi)."):S_({a:a,x:x})}
+  if(a=="fdel"){const v=val("fi");return v?ask("Fakt o'chirilsinmi?",()=>S_({a:a,v:v})):warn("Fakt raqamini yozing.")}
+  if(a=="daily")return S_({a:a,v:t.dataset.v});
+  if(a=="pushkb")return ask("Barcha foydalanuvchilarga yangilangan «Tarix» tugmasi yuboriladi. Davom etasizmi?",()=>S_({a:a}));
+  // asboblar (tanlangan imtihon bilan)
+  if(["xcode","xname","xstart","xdur","xres","xmsg"].includes(a)){
+    const i=xe();
+    if(!i)return warn("Avval imtihonni tanlang.");
+    if(a=="xcode"){const c=val("xc");if(c&&!/^\d{4}$/.test(c))return warn("Kod 4 ta raqam bo'lsin yoki bo'sh qoldiring.");return S_({a:a,i:i,v:c})}
+    if(a=="xname"){const n=val("xn");return n.length<2?warn("Yangi nomni yozing."):S_({a:a,i:i,v:n})}
+    if(a=="xstart"){
+      const v=val("xst");
+      if(v&&atTs(v)<Date.now()/1000-60)return warn("Bu vaqt o'tib ketgan. Kelajakdagi vaqtni tanlang.");
+      return S_({a:a,i:i,v:v});
+    }
+    if(a=="xdur"){
+      const n=Math.round(+val("xd"));
+      return n>=10&&n<=300?S_({a:a,i:i,v:String(n)}):warn("Davomiylik 10 dan 300 daqiqagacha bo'lsin.");
+    }
+    if(a=="xres"){const u=val("xs");return u?S_({a:a,i:i,v:u}):warn("Talaba ism, ID yoki telefonini yozing.")}
+    if(a=="xmsg"){
+      const x=val("xt");
+      if(!x)return warn("Xabar matnini yozing.");
+      return ask("Xabar yuborilsinmi?",()=>S_({a:a,i:i,v:val("xa"),x:x}));
+    }
+  }
+  S_({a:a});
+}
+
+function exams(){
+  atmo();
+  const D=sdata();
+  A.innerHTML=`<div class="bar"><span id="t">📋 Imtihonlar</span><span></span><button class="bk" id="bk">Orqaga</button></div>
+  <h2>Imtihonlar</h2>${exBlock(D.E)}
+  <button class="btn" data-act="new">➕ Yangi test tuzish</button>
+  <button class="btn ghost" data-act="panel">🔄 Ro'yxatni yangilash</button>
+  <button class="btn ghost" data-act="exams">💬 Chatda ko'rish</button>
+  ${tools(D)}
+  <p class="hint" style="margin-top:14px">Ro'yxatda oxirgi 6 ta imtihon ko'rinadi, qolganlari uchun «Chatda ko'rish».</p>`;
+  A.oninput=null;A.onclick=onAct;
+}
+
+function admin(){
+  atmo();
+  const D=sdata(),n=x=>esc(D[x]==null?0:D[x]),G=D.G||[70,65,60,55,50,46];
+  const T=(D.T||[]).map(r=>`<div class="trow"><span>🎓 ${esc(r[1])} · ${esc(r[0])}</span><button class="mini" data-act="tdel" data-id="${esc(r[0])}">Olib tashlash</button></div>`).join("")||`<p class="hint">O'qituvchilar yo'q.</p>`;
+  const C=(D.C||[]).map(c=>`<div class="trow"><span>📢 ${esc(c)}</span><button class="mini" data-act="chdel" data-ch="${esc(c)}">Olib tashlash</button></div>`).join("")||`<p class="hint">Majburiy kanal yo'q: obuna tekshirilmaydi.</p>`;
+  const chips=[["s-stat","Statistika"],["s-ex","Imtihonlar"],["s-t","Ustozlar"],["s-u","Foydalanuvchilar"],["s-m","Xabar"],["s-set","Sozlamalar"],["s-lk","Havolalar"],["s-fk","E'lon va faktlar"],["s-tl","Asboblar"]].map(c=>`<button data-go="${c[0]}">${c[1]}</button>`).join("");
+  A.innerHTML=`<div class="bar"><span id="t">🛡 Admin</span><span></span><button class="bk" id="bk">Orqaga</button></div>
+  <div class="chips">${chips}</div>
+  <h2 id="s-stat">Statistika</h2>
+  <div class="stats">
+    <div><i>👥</i><b>${n("u")}</b><small>Foydalanuvchilar</small></div>
+    <div><i>🆕</i><b>${n("n")}</b><small>24 soatda yangi</small></div>
+    <div><i>🎓</i><b>${n("t")}</b><small>O'qituvchilar</small></div>
+    <div><i>🚫</i><b>${n("b")}</b><small>Bloklanganlar</small></div>
+    <div><i>📝</i><b>${n("e")}</b><small>Imtihonlar</small></div>
+    <div><i>📥</i><b>${n("s")}</b><small>Topshirilgan ishlar</small></div>
+  </div>
+  <p class="hint" style="margin-top:10px">Ma'lumot panel oxirgi yangilangan paytdagi. Yangilash uchun pastdagi tugmani bosing.</p>
+  <button class="btn ghost" data-act="panel" style="margin-top:0">🔄 Panelni yangilash</button>
+
+  <h2 id="s-ex">Imtihonlar</h2>${exBlock(D.E)}
+  <button class="btn" data-act="new">➕ Yangi test tuzish</button>
+  <button class="btn ghost" data-act="tools">🛠 Imtihon asboblari (kod, vaqt, natija, xabar)</button>
+  <button class="btn ghost" data-act="exams">💬 Chatda ko'rish</button>
+
+  <h2 id="s-t">O'qituvchilar</h2>${T}
+  <label class="lb">Yangi o'qituvchi (ID yoki telefon)</label>
+  <div class="row2"><input class="inp" id="ta" placeholder="ID yoki +998..." autocomplete="off"><button class="mini" data-act="tadd">➕ Qo'shish</button></div>
+  <p class="hint" style="margin-top:8px">Ustoz avval botda /start bosib ro'yxatdan o'tgan bo'lishi kerak.</p>
+
+  <h2 id="s-u">Foydalanuvchilar</h2>
+  <label class="lb">Topish</label>
+  <div class="row2"><input class="inp" id="uf" placeholder="Ism, ID yoki telefon" autocomplete="off"><button class="mini" data-act="find">🔎 Topish</button></div>
+  <p class="hint" style="margin-top:8px">Natijada «ustoz qilish», «bloklash» va «o'chirish» tugmalari chiqadi.</p>
+  <label class="lb">Ismni o'zgartirish</label>
+  <div class="row2"><input class="inp" id="ru" placeholder="ID yoki telefon" autocomplete="off"><input class="inp" id="rn" placeholder="Yangi ism" maxlength="60" autocomplete="off"></div>
+  <button class="btn ghost" data-act="rename" style="margin-top:8px">✏️ O'zgartirish</button>
+  <button class="btn ghost" data-act="blist">🚫 Bloklanganlar ro'yxati</button>
+
+  <h2 id="s-m">Xabar yuborish</h2>
+  <label class="lb">Bitta foydalanuvchiga</label>
+  <input class="inp" id="dmu" placeholder="ID yoki telefon" autocomplete="off">
+  <textarea class="ta" id="dmt" maxlength="800" placeholder="Xabar matni" style="margin-top:8px"></textarea>
+  <button class="btn ghost" data-act="dm">✉️ Yuborish</button>
+  <label class="lb">Ommaviy xabar</label>
+  <select class="inp" id="bca"><option value="all">Hammaga</option><option value="teachers">Faqat o'qituvchilarga</option><option value="nosub">Faol imtihonni topshirmaganlarga</option></select>
+  <textarea class="ta" id="bct" maxlength="800" placeholder="Xabar matni" style="margin-top:8px"></textarea>
+  <button class="btn" data-act="bc">📢 Yuborish</button>
+
+  <h2 id="s-set">Sozlamalar</h2>
+  <p class="hint">Imtihon davomiyligi va boshlanish vaqti har bir imtihonni tuzayotganda belgilanadi («➕ Yangi test tuzish»). Tayyor imtihonning vaqtini «🛠 Imtihon asboblari» orqali o'zgartirish mumkin.</p>
+  <label class="lb">Majburiy kanallar</label>${C}
+  <div class="row2" style="margin-top:8px"><input class="inp" id="ch" placeholder="@kanal_nomi" autocomplete="off"><button class="mini" data-act="chadd">➕ Qo'shish</button></div>
+  <p class="hint" style="margin-top:8px">Bot kanalda admin bo'lishi kerak.</p>
+  <label class="lb">Daraja chegaralari (minimal ball)</label>
+  <div class="gr6">${GN.map((g,k)=>`<div><small>${g}</small><input id="g${k}" inputmode="decimal" value="${esc(G[k])}"></div>`).join("")}</div>
+  <button class="btn ghost" data-act="grades" style="margin-top:10px">💾 Chegaralarni saqlash</button>
+  <label class="lb">Qayta topshirishga ruxsat</label>
+  <p class="hint">Foydalanuvchi natijasi o'chadi va u imtihonni yana topshira oladi (imtihon davom etayotgan bo'lishi kerak).</p>
+  <div class="row2"><input class="inp" id="rtu" placeholder="Foydalanuvchi ID/telefon" autocomplete="off"><input class="inp" id="rte" inputmode="numeric" placeholder="Imtihon №" style="max-width:110px"></div>
+  <button class="btn ghost" data-act="retake">♻️ Ruxsat berish</button>
+
+  <h2 id="s-lk">🔗 Havolalar</h2>
+  <p class="hint">Bo'lim tanlang va Telegram post havolasini yozing. Bo'sh qoldirib saqlasangiz, standart havola tiklanadi. d = darslik, q = qo'llanma, x = xronologiya.</p>
+  <select class="inp" id="lk">${Object.keys(L).map(k=>`<option>${k}</option>`).join("")}</select>
+  <input class="inp" id="lu" placeholder="https://t.me/c/..." autocomplete="off" style="margin-top:8px">
+  <button class="btn" data-act="setlink">💾 Havolani saqlash</button>
+  <button class="btn ghost" data-act="pushkb">🔄 Hammaga yangilash</button>
+  <button class="btn ghost" data-act="links">📋 Saqlangan havolalar</button>
+
+  <h2 id="s-fk">📣 E'lon va tarixiy faktlar</h2>
+  <label class="lb">Bosh sahifadagi e'lon (bo'sh = olib tashlash)</label>
+  <textarea class="ta" id="nt" maxlength="200" placeholder="E'lon matni"></textarea>
+  <button class="btn ghost" data-act="notice">📣 E'lonni saqlash</button>
+  <label class="lb">«Tarixda bugun» faktlari</label>
+  <textarea class="ta" id="ft" maxlength="220" placeholder="Masalan: 1370-yil — Amir Temur taxtga o'tirdi."></textarea>
+  <button class="btn ghost" data-act="fadd">➕ Fakt qo'shish</button>
+  <div class="row2" style="margin-top:8px"><input class="inp" id="fi" inputmode="numeric" placeholder="Fakt raqami"><button class="mini" data-act="fdel">🗑 O'chirish</button></div>
+  <button class="btn ghost" data-act="flist">📃 Faktlar ro'yxati</button>
+  <div class="row2" style="margin-top:8px"><button class="mini" data-act="daily" data-v="1" style="height:44px;flex:1">⏰ Har kuni 08:00 — yoqish</button><button class="mini" data-act="daily" data-v="0" style="height:44px;flex:1">O'chirish</button></div>
+
+  <h2 id="s-tl">Asboblar</h2>
+  <button class="btn ghost" data-act="stat" style="margin-top:0">📊 Batafsil statistika (chatda)</button>
+  <button class="btn ghost" data-act="log">🧾 Faoliyat jurnali</button>
+  <button class="btn ghost" data-act="ucsv">📄 Foydalanuvchilar (CSV)</button>
+  <button class="btn ghost" data-act="backup">💾 Bazaning zaxira nusxasi</button>`;
+  A.oninput=null;A.onclick=onAct;
+}
+
+function res(){
+  let d;
+  try{d=dec(P.get("d"))}catch(e){A.innerHTML=`<h1>Xatolik</h1><p class="sub">Natijani o'qib bo'lmadi. Botdagi tugmani qayta bosing.</p>`;return}
+  d.x=d.x||{};d.m=d.m||"";d.o=d.o||"";const G=["A+","A","B+","B","C+","C","Sertifikatsiz"],mx=Math.max(1,...G.map(g=>d.x[g]||0));
+  let h=`<h1>${esc(d.s)}</h1><p class="sub">${esc(d.n)} · <span class="gr">${esc(d.g)}</span><br>${esc(d.t)}</p><h2>Darajalar · ${esc(d.N)} ishtirokchi</h2>`;
+  G.forEach(g=>{const v=d.x[g]||0;h+=`<div class="d"><span>${g}</span><i style="width:${Math.round(v/mx*60)}%"></i><em>${v}</em></div>`});
+  h+=`<h2>Test javoblarim</h2><div class="g">`;
+  for(let i=0;i<35;i++)h+=`<div class="${d.o[i]=="1"?"y":"n"}"><small>${i+1}</small>${esc(d.m[i])}</div>`;
+  h+=`</div><h2>Yozma javoblarim</h2><div class="wl">`;
+  for(let j=0;j<20;j++)h+=`<p class="${d.o[35+j]=="1"?"y":"n"}"><b>${36+(j>>1)}${"ab"[j&1]})</b> ${esc((d.w&&d.w[j])||"—")}</p>`;
+  A.innerHTML=h+"</div>";
+}
+
+({exam,res,new:teacher,exams,admin}[P.get("m")]||home)();
+</script>
+</body>
+</html>
